@@ -3,28 +3,47 @@ pragma solidity ^0.4.16;
 
 
 contract FirstClaimNotification {
-    // This declares a new complex type which will
-    // be used for variables later.
-    // It will represent a single voter.
+
+     struct  IncidentDetails{
+        uint pincode;
+        bytes32 date;
+
+        }
 
 
-    struct Insurance {
+
+    struct Fnol {
         uint policyNo;
-        address person;
+        bytes32 natureOfLoss;
+        IncidentDetails incidentDetails;
     }
 
 
+    mapping (address => Fnol) detailsMapping;
 
-
-    Insurance public claim;
+    address creator;
 
     function FirstClaimNotification( ) public {
-        claim = Insurance({policyNo: 20, person: msg.sender});
+        creator = msg.sender;
 
     }
 
-    function getDetails(uint no) public view returns (address addr) {
-         addr = claim.person;
+
+    function reportLoss(bytes32 natOfLoss, uint policyNumber, uint pin , bytes32 incidentDate, address addr ) public {
+
+        detailsMapping[addr] = Fnol({policyNo: policyNumber, natureOfLoss: natOfLoss, incidentDetails: IncidentDetails({pincode: pin, date: incidentDate}) });
+
+
     }
+
+    function getLossDetails(address addr) public view returns (uint) {
+         return detailsMapping[addr].policyNo;
+
+    }
+
+    function getCreator() public returns( address ){
+        return creator;
+    }
+
 
   }
