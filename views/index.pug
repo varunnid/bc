@@ -1,5 +1,33 @@
 extends layout
 
+
+
 block content
+
+  head
+  title My Site
+  script(src='/js/main.js')
+  script(src='/js/jquery.js')
+
+
   h1= title
-  p Welcome to #{title} there #{opo}
+  <!-- p Welcome to #{title} there #{opo} -->
+  h1(class='main_head') Enter the details
+
+
+  h3 Enter the name  
+  input(type='text' class='name')
+
+
+  h3 Enter the date  
+  input(type='text' class='date')
+
+  h3 Enter the policy number  
+  input(type='text' class='policy_number')
+
+  h3 Enter the address 
+  input(type='text' class='address')
+
+  <div class='btn'> <button class='go_button' onClick='submitTransaction()'>GO !</button>  </div>
+
+
